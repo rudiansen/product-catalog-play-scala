@@ -1,0 +1,21 @@
+.g8
+gradle
+logs
+project/project
+project/target
+project/scaffold.sbt
+target
+test
+
+# Gradle files #
+build.gradle
+gradlew
+gradlew.bat
+
+# Project files #
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
