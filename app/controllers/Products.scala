@@ -3,9 +3,15 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
+import play.api.i18n.{Lang, Langs, MessagesApi, MessagesProvider, MessagesImpl}
 import models.Product
 
-class Products @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class Products @Inject()(cc: ControllerComponents, langs: Langs, messagesApi: MessagesApi) extends AbstractController(cc) {
+
+  implicit val lang: Lang = langs.availables.head
+  implicit val messagesProvider: MessagesProvider = {
+    MessagesImpl(lang, messagesApi)
+  }
 
   def list = Action { implicit request =>
     val products = Product.findAll

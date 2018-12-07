@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(implicit messagesProvider: MessagesProvider)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
           <div class="navbar-inner">
             <div class="container">
               <a class="brand" href="@routes.HomeController.index()">
-                @title
+                @Messages("application.name")
               </a>
             </div>
           </div>

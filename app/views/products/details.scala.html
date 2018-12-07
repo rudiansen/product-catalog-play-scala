@@ -1,6 +1,6 @@
-@(product: Product)
+@(product: Product)(implicit messagesProvider: MessagesProvider)
 
-@main("Product Name") {
+@main(Messages("products.details", product.name)) {
   <h2>
     @tags.barcode(product.ean)
     Product Name
