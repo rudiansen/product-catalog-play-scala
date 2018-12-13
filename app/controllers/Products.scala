@@ -6,7 +6,6 @@ import play.api.mvc._
 import play.api.i18n.{Lang, Langs, MessagesApi, MessagesProvider, MessagesImpl, Messages}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, longNumber, nonEmptyText}
-import play.api.mvc.Flash
 import models.Product
 
 class Products @Inject()(cc: ControllerComponents, langs: Langs, messagesApi: MessagesApi) extends AbstractController(cc) {
@@ -21,7 +20,7 @@ class Products @Inject()(cc: ControllerComponents, langs: Langs, messagesApi: Me
         "ean" -> longNumber.verifying(
           "validation.ean.duplicate", Product.findByEan(_).isEmpty),
         "name" -> nonEmptyText,
-        "Description" -> nonEmptyText
+        "description" -> nonEmptyText
       )(Product.apply)(Product.unapply)
   )
 
@@ -57,8 +56,8 @@ class Products @Inject()(cc: ControllerComponents, langs: Langs, messagesApi: Me
   }
 
   def newProduct = Action { implicit request =>
-    val form = if (flash.get("error").isDefined)
-      productForm.bind(flash.data)
+    val form = if (request.flash.get("error").isDefined)
+      productForm.bind(request.flash.data)
     else
       productForm
 

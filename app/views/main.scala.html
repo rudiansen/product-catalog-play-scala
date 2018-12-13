@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)(implicit flash: Flash, messagesProvider: MessagesProvider)
+@(title: String)(content: Html)(implicit flash: Flash, lang: Lang, messagesProvider: MessagesProvider)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,19 +25,16 @@
                 @Messages("application.name")
               </a>
               <ul class="nav">
-                <li class="divider-vertical"></li>
                 <li class="active">
                   <a href="@routes.Products.list()">
                   @Messages("products.list.navigation")
                   </a>
                 </li>
                 <li class="active">
-                  <a href="@routes.Products.newProduct()">
-                    <i class="icon-plus icon-white"></i>
+                  <a href="@routes.Products.newProduct()">                    
                     @Messages("products.new.command")
                   </a>
                 </li>
-                <li class="divider-vertical"></li>
               </ul>
             </div>
           </div>
@@ -55,8 +52,9 @@
               @flash.get("error")
             </div>
           }
-          
+
           @content
+          @debug()
         </div>
       </div>
 
